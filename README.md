@@ -1,4 +1,4 @@
-# Salary Prediction Project
+# Salary Prediction Project  (Data Science - Python)
 
 ## 📄 Description
 
