@@ -5,44 +5,43 @@ from dash.dependencies import Input, Output, State
 import joblib
 
 # Initialize Dash App
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app.title = "Model Visualization Dashboard"
 
-# Define the available images and their descriptions
+# Define the plots and summaries
 plots = {
-    "Actual vs Predicted (Subset)": "actual_vs_predicted_subset.png",
-    "Actual vs Predicted Values": "actual_vs_predicted_values.png",
+    "Salary Distribution": "salary_distribution.png",
     "Correlation Matrix": "correlation_matrix.png",
+    "Pairplot": "pairplot.png",
     "Feature Importance": "feature_importance.png",
     "Feature Importance on Bar": "feature_importance_on_bar.png",
     "Feature Importance (XGBoost)": "feature_importance_xgboost.png",
     "Model Comparison": "model_comparison.png",
-    "Pairplot": "pairplot.png",
-    "Residuals Plot": "residuals_plot.png",
-    "Salary Distribution": "salary_distribution.png",
     "Salary Prediction Plot": "salary_prediction_plot.png",
+    "Actual vs Predicted (Subset)": "actual_vs_predicted_subset.png",
+    "Actual vs Predicted Values": "actual_vs_predicted_values.png",
+    "Residuals Plot": "residuals_plot.png",
 }
 
-# Define summaries for the plots
 summaries = {
-    "Actual vs Predicted (Subset)": "This plot compares actual vs. predicted salary values for a subset of test samples. Blue points represent actual values, while red points show predictions.",
-    "Actual vs Predicted Values": "This plot shows the overall comparison of actual vs. predicted salaries across all test samples.",
+    "Salary Distribution": "This histogram shows the distribution of salary values in the dataset, with a kernel density estimate overlay.",
     "Correlation Matrix": "The correlation matrix displays the relationships between different features in the dataset. Values close to 1 indicate a strong positive correlation.",
+    "Pairplot": "The pairplot shows pairwise relationships between features, with distributions and scatter plots for comparison.",
     "Feature Importance": "This bar chart visualizes the importance of each feature in predicting salaries using the Random Forest model.",
     "Feature Importance on Bar": "This plot provides feature importance annotated directly on the bars for better interpretability.",
     "Feature Importance (XGBoost)": "Feature importance as calculated by the XGBoost model, highlighting the most influential variables in predicting salaries.",
     "Model Comparison": "This chart compares the performance of different models using their R² scores.",
-    "Pairplot": "The pairplot shows pairwise relationships between features, with distributions and scatter plots for comparison.",
-    "Residuals Plot": "The residuals plot displays the differences between actual and predicted salaries. A balanced distribution around 0 indicates a good fit.",
-    "Salary Distribution": "This histogram shows the distribution of salary values in the dataset, with a kernel density estimate overlay.",
     "Salary Prediction Plot": "This regression plot visualizes the relationship between years of experience and salary, with predictions shown as a trend line.",
+    "Actual vs Predicted (Subset)": "This plot compares actual vs. predicted salary values for a subset of test samples. Blue points represent actual values, while red points show predictions.",
+    "Actual vs Predicted Values": "This plot shows the overall comparison of actual vs. predicted salaries across all test samples.",
+    "Residuals Plot": "The residuals plot displays the differences between actual and predicted salaries. A balanced distribution around 0 indicates a good fit.",
 }
 
-# Can load a different mode if needed to test the user interface.
 # Load the trained model (e.g., Random Forest)
 model = joblib.load('./model/salary_prediction_model.pkl')
 
-# Layout of the Dash app
-app.layout = html.Div(
+# Define layouts
+home_layout = html.Div(
     children=[
         html.H1("Model Visualization Dashboard", style={"text-align": "center"}),
 
@@ -53,7 +52,7 @@ app.layout = html.Div(
                 dcc.Dropdown(
                     id="plot-selector",
                     options=[{"label": name, "value": name} for name in plots.keys()],
-                    value=list(plots.keys())[0],  # Default to the first plot
+                    value=list(plots.keys())[0],  
                     style={"width": "50%"},
                 ),
             ],
@@ -91,12 +90,63 @@ app.layout = html.Div(
     ]
 )
 
-# Callback to update the displayed image and summary based on dropdown selection
+all_plots_layout = html.Div(
+    children=[
+        html.H1("All Plots", style={"text-align": "center", "margin-bottom": "20px"}),
+        html.Div(
+            children=[
+                html.Div(
+                    children=[
+                        html.Img(
+                            src=app.get_asset_url(path),
+                            style={
+                                "width": "100%",
+                                "border": "1px solid #ddd",
+                                "border-radius": "10px",
+                                "margin-bottom": "20px",
+                            },
+                        ),
+                        html.P(summary, style={"text-align": "center", "font-size": "14px"}),
+                    ]
+                )
+                for name, path, summary in zip(plots.keys(), plots.values(), summaries.values())
+            ],
+            style={"max-width": "800px", "margin": "0 auto"},
+        ),
+    ]
+)
+
+# Define main layout with routing
+app.layout = html.Div(
+    children=[
+        dcc.Location(id="url", refresh=False),
+        html.Div(
+            children=[
+                dcc.Link("Home", href="/", style={"margin-right": "15px", "font-size": "18px"}),
+                dcc.Link("All Plots", href="/all-plots", style={"font-size": "18px"}),
+            ],
+            style={"text-align": "center", "margin-bottom": "20px"},
+        ),
+        html.Div(id="page-content"),
+    ]
+)
+
+# Callback for dynamic page routing
+@app.callback(Output("page-content", "children"), [Input("url", "pathname")])
+def display_page(pathname):
+    if pathname == "/all-plots":
+        return all_plots_layout
+    return home_layout
+
+# Callback for updating the plot and summary based on user selection.
 @app.callback(
     [Output("plot-display", "children"), Output("summary-display", "children")],
     [Input("plot-selector", "value")],
 )
 def update_plot_and_summary(selected_plot):
+    if selected_plot is None:
+        # Fallback to the first plot if no selection is made
+        selected_plot = list(plots.keys())[0]
     plot_img = html.Img(
         src=app.get_asset_url(plots[selected_plot]),
         style={"width": "80%", "margin": "0 auto", "display": "block"},
@@ -120,6 +170,7 @@ def predict_salary(n_clicks, years_of_experience):
         else:
             return "Please enter a valid number for years of experience."
     return ""
+
 
 # Run the Dash app
 if __name__ == "__main__":

@@ -117,3 +117,36 @@ div {
     border-color: #154360;
     box-shadow: 0 0 4px rgba(26, 82, 118, 0.8);
 }
+
+/* Navigation bar styling */
+div > a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #1a5276;
+    background-color: #f4f4f4;
+    border: 1px solid #1a5276;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effects for links */
+div > a:hover {
+    background-color: #1a5276;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+/* Active link styling */
+div > a:focus, div > a:active {
+    background-color: #154360;
+    color: #fff;
+    border-color: #154360;
+    outline: none;
+}
+
