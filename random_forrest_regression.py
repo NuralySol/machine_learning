@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
@@ -77,6 +78,8 @@ plt.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.7)
 plt.legend(fontsize=12, loc='upper left')
 plt.tight_layout()
 
+# Save the plot
+plt.savefig('./random_forrest_&_gradient_boosting/actual_vs_predicted_subset.png')
 # Show the plot
 plt.show()
 
@@ -104,6 +107,8 @@ plt.ylabel('Feature', fontsize=14)
 plt.grid(axis='x', color='gray', linestyle='--', linewidth=0.5, alpha=0.7)
 plt.tight_layout()
 
+# Save the plot
+plt.savefig('./random_forrest_&_gradient_boosting/feature_importance.png')
 # Show the plot
 plt.show()
 
@@ -116,8 +121,14 @@ plt.title('Residuals Plot', fontsize=16)
 plt.xlabel('Predicted Values', fontsize=12)
 plt.ylabel('Residuals', fontsize=12)
 plt.tight_layout()
+
+# Save the plot
+plt.savefig('./random_forrest_&_gradient_boosting/residuals_plot.png')
+# Show the plot
 plt.show()
 
+# Save the model to the project directory
+joblib.dump(model, './model/random_forest_model.pkl')
 
 #! Key Points in Random Forest Regression Model. 
 """
