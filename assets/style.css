@@ -1,0 +1,75 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center-align the main title */
+h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-top: 20px;
+}
+
+/* Style the dropdown label */
+label {
+    font-size: 1.2em;
+    color: #34495e;
+    font-weight: bold;
+}
+
+/* Style the dropdown */
+#plot-selector {
+    border: 2px solid #2c3e50;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+/* Style the user input section */
+h3 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+input[type="number"] {
+    border: 2px solid #2c3e50;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+/* Style the buttons */
+button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #34495e;
+}
+
+/* Center-align the prediction output */
+#prediction-output {
+    color: #e74c3c;
+}
+
+/* Style the plot display */
+img {
+    border: 2px solid #34495e;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+/* Add some spacing for better layout */
+div {
+    margin-bottom: 20px;
+}

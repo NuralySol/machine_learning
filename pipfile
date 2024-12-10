@@ -9,6 +9,12 @@ numpy = "*"
 matplotlib = "*"
 seaborn = "*"
 scikit-learn = "*"
+xgboost = "*"
+lightgbm = "*"
+scipy = "*"
+plotly = "*"
+dash = "*"
+dash-bootstrap-components = "*"
 
 [dev-packages]
 

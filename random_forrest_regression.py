@@ -20,7 +20,7 @@ data = data.dropna()
 # Encode categorical variables
 labelencoder = LabelEncoder()
 for column in data.select_dtypes(include=['object']).columns:
-    data[column] = labelencoder.fit_transform(data[column])
+   data[column] = labelencoder.fit_transform(data[column])
 
 # Split the data into independent ('X') and dependent ('y') variables
 X = data.iloc[:, :-1].values  # Features (all columns except Salary)
@@ -48,8 +48,8 @@ feature_names = data.columns[:-1]  # All columns except Salary
 # Create importance_df for Feature Importance
 feature_importances = model.feature_importances_
 importance_df = pd.DataFrame({
-    'Feature': feature_names,
-    'Importance': feature_importances
+   'Feature': feature_names,
+   'Importance': feature_importances
 }).sort_values(by='Importance', ascending=False)
 
 # Enhanced Visualization: Actual vs Predicted Values (Subset for Readability)
@@ -91,12 +91,12 @@ sns.barplot(x='Importance', y='Feature', data=importance_df, palette='coolwarm',
 
 # Add annotations on the bars
 for bar in plt.gca().patches:
-    bar_width = bar.get_width()
-    plt.gca().text(
-        bar_width + 0.01, bar.get_y() + bar.get_height() / 2, 
-        f'{bar_width:.2f}', 
-        ha='left', va='center', fontsize=12, color='black', weight='bold'  
-    )
+   bar_width = bar.get_width()
+   plt.gca().text(
+      bar_width + 0.01, bar.get_y() + bar.get_height() / 2, 
+      f'{bar_width:.2f}', 
+      ha='left', va='center', fontsize=12, color='black', weight='bold'  
+   )
 
 # Title and axis labels
 plt.title('Feature Importance (Random Forest)', fontsize=18, fontweight='bold', pad=15)
@@ -217,14 +217,14 @@ This implementation of Random Forest Regression effectively models salary predic
 1. **Mean Squared Error (MSE)**: 50,493,882.59
    - **Definition**: Measures the average squared difference between actual and predicted values.
    - **Interpretation**: 
-    - A relatively low MSE indicates that the model's predictions are close to the actual salaries.
-    - If salaries are in the range of tens or hundreds of thousands, this suggests good predictive performance.
+   - A relatively low MSE indicates that the model's predictions are close to the actual salaries.
+   - If salaries are in the range of tens or hundreds of thousands, this suggests good predictive performance.
 
 2. **R² Score**: 0.98
    - **Definition**: Represents the proportion of variance in the target variable (Salary) explained by the model.
    - **Interpretation**:
      - A very high R² score means the model explains **98% of the variance** in salary data based on the features.
-    - This indicates the model captures the relationships in the data exceptionally well.
+   - This indicates the model captures the relationships in the data exceptionally well.
 
 ## Key Takeaways:
 - **Accuracy**: The low MSE and high R² score suggest that the model performs very well.
