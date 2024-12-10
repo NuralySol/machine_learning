@@ -61,6 +61,17 @@ The model was evaluated using standard metrics:
 
 ---
 
+## Dash App initialization
+
+To explore the **Model Visualization Dashboard**, follow these steps:
+
+1. **Activate the Virtual Environment**:
+   Open your terminal and run:
+
+   ```bash
+   pipenv shell
+   python3 app.py
+
 ## 📜 Additional Resources
 
 For further details, refer to the main [README.md](README.md).
