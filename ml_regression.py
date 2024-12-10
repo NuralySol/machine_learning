@@ -1,3 +1,5 @@
+
+#! Multiple Linear Regression for Salary Prediction. Using the same dataset, we will train a Multiple Linear Regression model to predict salaries based on multiple features.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
