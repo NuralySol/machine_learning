@@ -1,75 +1,119 @@
 /* General body styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #2c3e50;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
 /* Center-align the main title */
 h1 {
-    color: #2c3e50;
-    font-size: 2.5em;
+    color: #1a5276;
+    font-size: 2.8em;
+    text-align: center;
     margin-top: 20px;
+    font-weight: 700;
 }
 
 /* Style the dropdown label */
 label {
-    font-size: 1.2em;
-    color: #34495e;
-    font-weight: bold;
+    font-size: 1.1em;
+    color: #2c3e50;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
 }
 
 /* Style the dropdown */
 #plot-selector {
-    border: 2px solid #2c3e50;
-    border-radius: 5px;
-    padding: 5px;
+    border: 1px solid #1a5276;
+    border-radius: 8px;
+    padding: 8px;
     font-size: 1em;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #2c3e50;
 }
 
 /* Style the user input section */
 h3 {
-    color: #2c3e50;
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    color: #1a5276;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 input[type="number"] {
-    border: 2px solid #2c3e50;
-    border-radius: 5px;
-    padding: 5px;
+    border: 1px solid #1a5276;
+    border-radius: 8px;
+    padding: 10px;
     font-size: 1em;
+    width: calc(100% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #2c3e50;
+}
+
+input[type="number"]::placeholder {
+    color: #95a5a6;
 }
 
 /* Style the buttons */
 button {
-    background-color: #2c3e50;
+    background-color: #1a5276;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
+    border-radius: 8px;
+    padding: 12px 20px;
     font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #34495e;
+    background-color: #154360;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Center-align the prediction output */
 #prediction-output {
-    color: #e74c3c;
+    color: #d35400;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Style the plot display */
 img {
-    border: 2px solid #34495e;
+    border: 2px solid #bdc3c7;
     border-radius: 10px;
     margin: 20px 0;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Add some spacing for better layout */
+/* Add spacing and uniform layout to divs */
 div {
     margin-bottom: 20px;
+}
+
+/* Add a container for central alignment */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhance dropdown focus */
+#plot-selector:focus {
+    outline: none;
+    border-color: #154360;
+    box-shadow: 0 0 4px rgba(26, 82, 118, 0.8);
 }
